@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Reservation System</title>
+    <link rel="stylesheet" href="feedbackstyles.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('airplane-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #53343bee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(131, 23, 117, 0.2);
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #e6000f;
+            text-align: center;
+        }
+
+        #call-section {
+            width: 200px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        #chatIcon {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        #feedback-section {
+            width: 450px;
+            font-size: 0.9em;
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        #faq-section {
+            width: 45%;
+            position: absolute;
+            top: 25%;
+            left: 20%;
+            max-height: 85vh;
+            overflow: hidden;
+        }
+
+        /* FAQ Section Styles */
+        .faq-item h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        /* Feedback Section Styles */
+        .feedback-message {
+            font-size: 1em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #e6000f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #d4000d;
+        }
+
+        .feedback-item {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        /* Load More Button */
+        .load-more {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: #e6000f;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .load-more:hover {
+            background-color: #d4000d;
+        }
+
+        /* Customer Support Section */
+        #customer-support-section {
+            width: 300px;
+            position: absolute;
+            top: 20px;
+            left: calc(50% - 150px); /* Centered horizontally */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #customer-support-icon {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <img class="bgpic" src="./Blue and White Illustrated Sky and Airplane Desktop Wallpaper.png" alt="Airplane Background">
+   
+    <!-- Customer Support Section -->
+    <div class="section" id="customer-support-section">
+        <img id="customer-support-icon" src="customer-support-icon.png" alt="Customer Support Icon">
+        <h2>Customer Support</h2>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="section" id="call-section">
+        <h2>Contact Us</h2>
+        <div class="call-info">
+            <p>For immediate assistance, call us:</p>
+            <a href="tel:01855123216" class="call-btn">📞 01855123216</a>
+        </div>
+    </div>
+
+    <!-- Chat Icon -->
+    <div id="chatIcon">💬</div>
+
+    <!-- Feedback Section -->
+    <div class="section" id="feedback-section">
+        <h2>Feedback</h2>
+        <p class="feedback-message">Leave a feedback so that we can improve our service</p>
+        <form class="feedback-form" id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Name: *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number: *</label>
+                <input type="tel" id="contact" name="contact" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country">
+            </div>
+            <div class="form-group">
+                <label for="flightNumber">Flight Number:</label>
+                <input type="text" id="flightNumber" name="flightNumber" placeholder="Helps to evaluate feedback">
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="" disabled selected>Select a rating</option>
+                    <option value="1">1 - Very Poor</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="3">3 - Average</option>
+                    <option value="4">4 - Good</option>
+                    <option value="5">5 - Excellent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="5" placeholder="Write your comments here"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+        </form>
+        <div class="feedback-list" id="feedbackList">
+            <!-- Existing feedback goes here -->
+        </div>
+        <div class="load-more" id="loadMore">Load More</div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="section" id="faq-section">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+            <h4>What is the process for changing a reservation?</h4>
+            <p>To change a reservation, please visit our Manage Reservations page or call customer service.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I cancel my ticket and get a refund?</h4>
+            <p>Yes, cancellations are allowed under certain conditions. Refunds depend on the ticket type.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What should I do if I miss my flight?</h4>
+            <p>If you miss your flight, please contact customer service immediately for assistance with rebooking.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How can I check the status of my flight?</h4>
+            <p>You can check the status of your flight on our website or by calling customer service.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What are the baggage allowances for my flight?</h4>
+            <p>Please check our website or contact customer service for detailed baggage allowance information.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How early should I arrive at the airport?</h4>
+            <p>We recommend arriving at least 2 hours before domestic flights and 3 hours before international flights.</p>
+        </div>
+    </div>
+
+    <script>
+        // Handle feedback form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const rating = document.getElementById('rating').value;
+            const comments = document.getElementById('comments').value;
+
+            if (!name || !rating || !comments.trim()) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            const feedbackList = document.getElementById('feedbackList');
+            const feedbackItem = document.createElement('div');
+            feedbackItem.className = 'feedback-item';
+            feedbackItem.innerHTML = `
+                <h4>Name: ${name}</h4>
+                <h4>Rating: ${rating}</h4>
+                <p>${comments}</p>
+            `;
+            feedbackList.appendChild(feedbackItem);
+
+            // Check if feedback exceeds image portion
+            const feedbackSection = document.getElementById('feedback-section');
+            const bgImageHeight = document.querySelector('.bgpic').clientHeight;
+            if (feedbackSection.scrollHeight > bgImageHeight) {
+                document.getElementById('loadMore').style.display = 'block';
+            } else {
+                document.getElementById('loadMore').style.display = 'none';
+            }
+
+            // Reset the form
+            document.getElementById('feedbackForm').reset();
+        });
+
+        // Chat icon click handler
+        document.getElementById('chatIcon').addEventListener('click', function () {
+            alert('Chat feature is under development. Stay tuned!');
+        });
+
+        // Load more feedback handler
+        document.getElementById('loadMore').addEventListener('click', function () {
+            alert('More feedback loading feature is under development.');
+        });
+    </script>
+</body>
+</html>
